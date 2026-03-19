@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phoneaway — Lockable Phone Pouches for Schools & Venues | UK</title>
+<meta name="description" content="The UK's most affordable lockable phone pouches. Ofsted-ready implementation kit included free. Used by schools, comedy clubs, theatres and events. From £10/unit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+
+<style>
+/* ── RESET & BASE ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #1a2a35;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+/* ── TOKENS ── */
+:root {
+  --navy:       #12284A;
+  --navy-mid:   #1b3d6e;
+  --navy-lt:    #d4e3f5;
+  --orange:     #E8590A;
+  --orange-lt:  #fff0e8;
+  --orange-dk:  #b84108;
+  --cream:      #F7F4EF;
+  --slate:      #4a5e72;
+  --muted:      #7a90a4;
+  --border:     #dde6ef;
+  --white:      #ffffff;
+  --dark:       #0d1d2e;
+  --green:      #1e6b45;
+  --green-lt:   #d4edda;
+  --r:          12px;
+  --r-lg:       18px;
+  --sh: 0 4px 32px rgba(18,40,74,0.10);
+  --sh-lg: 0 8px 48px rgba(18,40,74,0.16);
+}
+
+/* ── TYPE ── */
+h1,h2,h3,h4 { font-family: 'DM Serif Display', Georgia, serif; line-height: 1.15; color: inherit; }
+h1 { font-size: clamp(2.4rem, 5.5vw, 4rem); }
+h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); }
+h3 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); }
+h4 { font-size: 1.1rem; font-family: 'DM Sans', sans-serif; font-weight: 600; }
+p { margin-bottom: 1rem; }
+p:last-child { margin-bottom: 0; }
+strong { font-weight: 600; }
+a { color: var(--orange); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── LAYOUT ── */
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+.container-sm { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+.section-pad { padding: 96px 0; }
+.section-pad-sm { padding: 72px 0; }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600; font-size: 15px; letter-spacing: 0.01em;
+  padding: 14px 28px; border-radius: 8px;
+  border: none; cursor: pointer;
+  transition: all 0.18s ease;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--orange); color: #fff;
+}
+.btn-primary:hover { background: var(--orange-dk); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(232,89,10,0.35); }
+.btn-secondary {
+  background: transparent; color: var(--orange);
+  border: 2px solid var(--orange);
+}
+.btn-secondary:hover { background: var(--orange-lt); }
+.btn-white {
+  background: #fff; color: var(--navy);
+}
+.btn-white:hover { background: #f0f4f8; transform: translateY(-1px); }
+.btn-lg { padding: 17px 36px; font-size: 17px; border-radius: 10px; }
+.btn-sm { padding: 10px 20px; font-size: 14px; }
+.arrow::after { content: ' →'; }
+
+/* ── NAV ── */
+.nav {
+  position: sticky; top: 0; z-index: 1000;
+  background: var(--navy);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  backdrop-filter: blur(10px);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px; max-width: 1120px; margin: 0 auto;
+}
+.nav-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.55rem; color: #fff; text-decoration: none !important;
+  letter-spacing: -0.01em;
+}
+.nav-logo span { color: var(--orange); }
+.nav-links {
+  display: flex; align-items: center; gap: 28px;
+  list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.72); font-size: 14px; font-weight: 500;
+  text-decoration: none; transition: color 0.15s;
+}
+.nav-links a:hover { color: #fff; text-decoration: none; }
+.nav-cta { margin-left: 12px; }
+.nav-mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger { display: block; width: 22px; height: 2px; background: #fff; position: relative; }
+.hamburger::before,.hamburger::after { content:''; position:absolute; width:22px; height:2px; background:#fff; left:0; }
+.hamburger::before { top:-7px; } .hamburger::after { top:7px; }
+
+/* ── URGENCY BAR ── */
+.urgency-bar {
+  background: var(--orange); color: #fff;
+  padding: 12px 24px; text-align: center;
+  font-size: 14px; font-weight: 500; letter-spacing: 0.02em;
+}
+.urgency-bar strong { font-weight: 700; }
+.urgency-divider { margin: 0 12px; opacity: 0.5; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--navy);
+  padding: 100px 0 80px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -120px; right: -80px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,89,10,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: -100px; left: -60px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(232,89,10,0.15); border: 1px solid rgba(232,89,10,0.3);
+  color: #f5a06b; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 100px; margin-bottom: 20px;
+}
+.hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); display: block; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.hero h1 { color: #fff; margin-bottom: 20px; }
+.hero h1 em { font-style: italic; color: var(--orange); }
+.hero-sub {
+  color: rgba(255,255,255,0.68); font-size: 1.15rem; line-height: 1.7;
+  margin-bottom: 36px; max-width: 540px;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
+.hero-trust {
+  display: flex; gap: 24px; flex-wrap: wrap;
+}
+.hero-trust-item {
+  display: flex; align-items: center; gap: 8px;
+  color: rgba(255,255,255,0.55); font-size: 13px;
+}
+.hero-trust-item::before { content: '✓'; color: var(--orange); font-weight: 700; }
+
+/* Hero visual */
+.hero-visual {
+  display: flex; flex-direction: column; gap: 14px;
+}
+.hero-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: var(--r-lg); padding: 22px 24px;
+  backdrop-filter: blur(8px);
+}
+.hero-card-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 8px;
+}
+.hero-stat {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.4rem; color: #fff; line-height: 1;
+}
+.hero-stat-sub { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+.hero-card-row { display: flex; gap: 14px; }
+.hero-card-row .hero-card { flex: 1; }
+.hero-price-tag {
+  display: inline-block;
+  background: var(--orange); color: #fff;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem; padding: 8px 18px; border-radius: 8px;
+  margin-right: 8px;
+}
+.hero-vs { font-size: 12px; color: rgba(255,255,255,0.4); }
+.hero-competitor { font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: line-through; }
+
+/* ── LOGOS / PROOF BAR ── */
+.proof-bar {
+  background: var(--cream); padding: 28px 0;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.proof-bar-inner {
+  display: flex; align-items: center; justify-content: center;
+  gap: 40px; flex-wrap: wrap;
+}
+.proof-badge {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--slate); font-size: 13px; font-weight: 500;
+}
+.proof-badge-icon {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--navy); display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 14px; font-weight: 700; flex-shrink: 0;
+}
+.proof-divider { width: 1px; height: 28px; background: var(--border); }
+
+/* ── HOW IT WORKS ── */
+.hiw-steps {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 0; position: relative; margin-top: 56px;
+}
+.hiw-steps::before {
+  content: '';
+  position: absolute; top: 36px; left: calc(16.66% + 20px); right: calc(16.66% + 20px);
+  height: 2px; background: var(--border);
+}
+.hiw-step { text-align: center; padding: 0 24px; }
+.hiw-num {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--navy); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Serif Display', serif; font-size: 1.8rem;
+  margin: 0 auto 20px; position: relative; z-index: 1;
+  border: 4px solid #fff; box-shadow: var(--sh);
+}
+.hiw-step.accent .hiw-num { background: var(--orange); }
+.hiw-step h3 { font-size: 1.25rem; color: var(--navy); margin-bottom: 10px; }
+.hiw-step p { color: var(--slate); font-size: 15px; }
+.hiw-note {
+  margin-top: 48px; background: var(--navy); border-radius: var(--r-lg);
+  padding: 28px 36px; display: flex; gap: 20px; align-items: flex-start;
+}
+.hiw-note-icon {
+  width: 40px; height: 40px; border-radius: 50%; background: var(--orange);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 18px; flex-shrink: 0; margin-top: 2px;
+}
+.hiw-note-text { color: rgba(255,255,255,0.85); font-size: 15px; }
+.hiw-note-text strong { color: #fff; }
+
+/* ── KIT SECTION ── */
+.kit-section { background: var(--navy); color: #fff; }
+.kit-header { text-align: center; margin-bottom: 56px; }
+.kit-eyebrow {
+  display: inline-block; background: rgba(232,89,10,0.18);
+  color: #f5a06b; font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 16px;
+}
+.kit-header h2 { color: #fff; margin-bottom: 16px; }
+.kit-header p { color: rgba(255,255,255,0.65); font-size: 1.05rem; max-width: 640px; margin: 0 auto; }
+.kit-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-bottom: 48px;
+}
+.kit-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: var(--r); padding: 22px 24px;
+  transition: all 0.2s;
+}
+.kit-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(232,89,10,0.35);
+  transform: translateY(-2px);
+}
+.kit-card-header {
+  display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px;
+}
+.kit-doc-num {
+  min-width: 36px; height: 36px;
+  background: var(--orange); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: #fff; letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+.kit-card h4 { color: #fff; font-size: 15px; margin-bottom: 3px; }
+.kit-format { font-size: 11px; color: rgba(255,255,255,0.38); text-transform: uppercase; letter-spacing: 0.08em; }
+.kit-card p { font-size: 13.5px; color: rgba(255,255,255,0.6); margin-bottom: 10px; }
+.kit-ofsted-tag {
+  display: inline-block; background: rgba(212,237,218,0.12);
+  border: 1px solid rgba(30,107,69,0.4);
+  color: #7dd4a8; font-size: 11px; padding: 3px 10px; border-radius: 100px;
+  font-weight: 500;
+}
+.kit-cta-bar {
+  background: rgba(232,89,10,0.1); border: 1px solid rgba(232,89,10,0.25);
+  border-radius: var(--r-lg); padding: 32px 40px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  flex-wrap: wrap;
+}
+.kit-cta-text h3 { color: #fff; font-size: 1.4rem; margin-bottom: 6px; }
+.kit-cta-text p { color: rgba(255,255,255,0.6); font-size: 14px; }
+
+/* ── PRICING ── */
+.pricing-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 56px;
+}
+.pricing-card {
+  border: 1px solid var(--border); border-radius: var(--r-lg);
+  overflow: hidden; box-shadow: var(--sh);
+}
+.pricing-card-header {
+  background: var(--navy); padding: 24px 28px;
+}
+.pricing-card-header h3 { color: #fff; font-size: 1.3rem; margin-bottom: 4px; }
+.pricing-card-header p { color: rgba(255,255,255,0.55); font-size: 14px; }
+.pricing-card-body { padding: 24px 28px; }
+.price-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; border-bottom: 1px solid var(--border);
+}
+.price-row:last-child { border-bottom: none; }
+.price-qty { font-size: 14px; color: var(--slate); }
+.price-val { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--navy); }
+.price-val span { font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--muted); font-weight: 400; }
+.price-saving {
+  font-size: 11px; background: var(--green-lt); color: var(--green);
+  padding: 2px 8px; border-radius: 100px; font-weight: 600;
+}
+.pricing-vs {
+  margin-top: 40px; background: var(--cream);
+  border-radius: var(--r-lg); padding: 32px 40px;
+}
+.pricing-vs h3 { font-size: 1.25rem; color: var(--navy); margin-bottom: 20px; }
+.vs-table { width: 100%; border-collapse: collapse; }
+.vs-table th {
+  background: var(--navy); color: #fff;
+  padding: 12px 16px; text-align: left; font-size: 13px; font-weight: 600;
+}
+.vs-table th:last-child { text-align: center; }
+.vs-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid var(--border); }
+.vs-table tr:last-child td { border-bottom: none; }
+.vs-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+.vs-table td:last-child { text-align: center; }
+.vs-check { color: var(--green); font-weight: 700; font-size: 16px; }
+.vs-cross { color: #c0392b; font-weight: 700; font-size: 16px; }
+.vs-them { color: var(--muted); text-decoration: line-through; }
+.vs-us { color: var(--orange); font-weight: 700; }
+
+/* ── SEGMENTS ── */
+.segments-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px;
+}
+.segment-card {
+  border-radius: var(--r-lg); overflow: hidden;
+  border: 1px solid var(--border); box-shadow: var(--sh);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.segment-card:hover { transform: translateY(-3px); box-shadow: var(--sh-lg); }
+.segment-header {
+  padding: 28px 28px 20px;
+}
+.segment-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 16px;
+  background: rgba(232,89,10,0.1); color: var(--orange);
+}
+.segment-header h3 { font-size: 1.35rem; color: var(--navy); margin-bottom: 6px; }
+.segment-tag {
+  display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 4px 10px; border-radius: 100px; margin-bottom: 12px;
+}
+.segment-body { padding: 0 28px 28px; }
+.segment-body p { color: var(--slate); font-size: 14.5px; margin-bottom: 14px; }
+.segment-bullets { list-style: none; padding: 0; margin-bottom: 20px; }
+.segment-bullets li {
+  font-size: 14px; color: var(--slate); padding: 5px 0 5px 20px;
+  position: relative; border-bottom: 1px solid var(--border);
+}
+.segment-bullets li:last-child { border-bottom: none; }
+.segment-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--orange); font-weight: 700; }
+.seg-schools .segment-header { background: #f0f4fb; }
+.seg-schools .segment-tag { background: #dce8f7; color: #1b3d6e; }
+.seg-events .segment-header { background: #0d1d2e; }
+.seg-events h3 { color: #fff; }
+.seg-events .segment-tag { background: rgba(232,89,10,0.2); color: var(--orange); }
+.seg-work .segment-header { background: var(--cream); }
+.seg-work .segment-tag { background: #e8f0e0; color: #2d5a1e; }
+.seg-wellness .segment-header { background: #1a3a3a; }
+.seg-wellness h3 { color: #fff; }
+.seg-wellness .segment-tag { background: rgba(30,107,69,0.25); color: #7dd4a8; }
+
+/* ── WHY SECTION ── */
+.why-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 56px;
+}
+.why-card {
+  background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 28px; box-shadow: var(--sh);
+  transition: transform 0.2s;
+}
+.why-card:hover { transform: translateY(-2px); }
+.why-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: var(--orange); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; margin-bottom: 16px;
+}
+.why-card h4 { color: var(--navy); margin-bottom: 8px; font-size: 1.05rem; }
+.why-card p { color: var(--slate); font-size: 14px; }
+
+/* ── STATS BAND ── */
+.stats-band { background: var(--orange); padding: 56px 0; }
+.stats-inner {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+}
+.stat-block { text-align: center; padding: 0 20px; }
+.stat-block + .stat-block { border-left: 1px solid rgba(255,255,255,0.25); }
+.stat-val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem; color: #fff; display: block; line-height: 1;
+}
+.stat-lbl { font-size: 13px; color: rgba(255,255,255,0.78); margin-top: 6px; }
+.stat-src { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 4px; }
+
+/* ── TESTIMONIALS ── */
+.testimonials-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 56px;
+}
+.testimonial-card {
+  background: #fff; border: 1px solid var(--border); border-radius: var(--r-lg);
+  padding: 32px; box-shadow: var(--sh);
+  display: flex; flex-direction: column;
+}
+.testimonial-quote {
+  font-size: 28px; color: var(--orange); line-height: 1;
+  margin-bottom: 12px; font-family: 'DM Serif Display', serif;
+}
+.testimonial-card p {
+  font-size: 15px; color: var(--dark); line-height: 1.7;
+  flex: 1; font-style: italic; margin-bottom: 20px;
+}
+.testimonial-meta { border-top: 1px solid var(--border); padding-top: 16px; }
+.testimonial-name { font-weight: 600; font-size: 14px; color: var(--navy); }
+.testimonial-role { font-size: 13px; color: var(--muted); }
+.testimonial-stars { color: var(--orange); font-size: 13px; margin-bottom: 8px; }
+
+/* ── FAQ ── */
+.faq-list { margin-top: 48px; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-q {
+  width: 100%; background: none; border: none; cursor: pointer;
+  padding: 22px 0; text-align: left;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; color: var(--navy);
+}
+.faq-q:hover { color: var(--orange); }
+.faq-icon {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--navy); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0; transition: transform 0.2s, background 0.2s;
+  font-weight: 300; line-height: 1;
+}
+.faq-item.open .faq-icon { background: var(--orange); transform: rotate(45deg); }
+.faq-a {
+  display: none; padding: 0 0 22px; color: var(--slate);
+  font-size: 15px; line-height: 1.7; max-width: 820px;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* ── FORM SECTION ── */
+.form-section {
+  background: var(--navy); position: relative; overflow: hidden;
+}
+.form-section::before {
+  content: '';
+  position: absolute; top: -200px; right: -100px;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,89,10,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.form-inner {
+  display: grid; grid-template-columns: 1fr 520px; gap: 80px; align-items: start;
+}
+.form-left h2 { color: #fff; margin-bottom: 16px; }
+.form-left .lead { color: rgba(255,255,255,0.68); font-size: 1.05rem; line-height: 1.75; margin-bottom: 32px; }
+.form-urgency {
+  background: rgba(232,89,10,0.12); border: 1px solid rgba(232,89,10,0.3);
+  border-radius: var(--r); padding: 20px 24px; margin-bottom: 32px;
+}
+.form-urgency h4 { color: var(--orange); font-size: 14px; margin-bottom: 6px; }
+.form-urgency p { color: rgba(255,255,255,0.6); font-size: 13.5px; margin: 0; }
+.form-promise-list { list-style: none; padding: 0; }
+.form-promise-list li {
+  display: flex; gap: 10px; align-items: flex-start;
+  color: rgba(255,255,255,0.65); font-size: 14px; padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.form-promise-list li:last-child { border-bottom: none; }
+.form-promise-list li::before { content: '✓'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+.form-card {
+  background: #fff; border-radius: var(--r-lg); padding: 36px;
+  box-shadow: 0 16px 64px rgba(0,0,0,0.3);
+}
+.form-card h3 { color: var(--navy); font-size: 1.3rem; margin-bottom: 6px; }
+.form-card .form-sub { color: var(--slate); font-size: 14px; margin-bottom: 24px; }
+.form-group { margin-bottom: 18px; }
+.form-group label {
+  display: block; font-size: 13px; font-weight: 600; color: var(--navy);
+  margin-bottom: 6px; letter-spacing: 0.01em;
+}
+.form-group input, .form-group select {
+  width: 100%; padding: 12px 16px;
+  border: 1.5px solid var(--border); border-radius: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--dark);
+  background: #fff; transition: border-color 0.15s, box-shadow 0.15s;
+  appearance: none;
+}
+.form-group input:focus, .form-group select:focus {
+  outline: none; border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(232,89,10,0.12);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-submit {
+  width: 100%; padding: 16px; font-size: 16px; border-radius: 10px;
+  margin-top: 6px;
+}
+.form-note {
+  text-align: center; font-size: 12px; color: var(--muted); margin-top: 12px;
+}
+
+/* ── FOOTER ── */
+.footer { background: var(--dark); padding: 56px 0 32px; }
+.footer-inner {
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
+  padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 28px;
+}
+.footer-brand {
+  font-family: 'DM Serif Display', serif; font-size: 1.55rem;
+  color: #fff; margin-bottom: 12px;
+}
+.footer-brand span { color: var(--orange); }
+.footer-desc { color: rgba(255,255,255,0.45); font-size: 14px; line-height: 1.7; max-width: 320px; }
+.footer-col h5 { color: #fff; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 16px; }
+.footer-col a { display: block; color: rgba(255,255,255,0.45); font-size: 14px; margin-bottom: 8px; text-decoration: none; transition: color 0.15s; }
+.footer-col a:hover { color: rgba(255,255,255,0.85); text-decoration: none; }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom p { color: rgba(255,255,255,0.3); font-size: 12.5px; }
+.footer-update {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px; padding: 5px 14px;
+  font-size: 11px; color: rgba(255,255,255,0.4);
+}
+
+/* ── SECTION HEADERS ── */
+.section-header { text-align: center; max-width: 680px; margin: 0 auto; }
+.section-eyebrow {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; padding: 5px 14px; border-radius: 100px;
+  margin-bottom: 14px;
+}
+.eyebrow-navy { background: var(--navy-lt); color: var(--navy); }
+.eyebrow-orange { background: var(--orange-lt); color: var(--orange-dk); }
+.section-header h2 { margin-bottom: 14px; }
+.section-header p { color: var(--slate); font-size: 1.05rem; }
+
+/* ── DIVIDER CTA ── */
+.inline-cta {
+  text-align: center; margin-top: 48px;
+  display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { display: grid; grid-template-columns: 1fr 1fr; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .stat-block + .stat-block { border-left: none; }
+  .stat-block:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.25); }
+  .stat-block { padding: 20px; }
+  .form-inner { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .section-pad { padding: 64px 0; }
+  .nav-links { display: none; }
+  .nav-mobile-toggle { display: block; }
+  .kit-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .segments-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .hero-visual { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .hiw-steps { grid-template-columns: 1fr; gap: 32px; }
+  .hiw-steps::before { display: none; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .kit-cta-bar { flex-direction: column; text-align: center; }
+  .hero-actions { flex-direction: column; }
+  h1 { font-size: 2.2rem; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .stats-inner { grid-template-columns: 1fr; }
+  .stat-block:nth-child(odd) { border-right: none; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+/* ── ANIMATIONS ── */
+.fade-up {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ══ URGENCY BAR ══ -->
+<div class="urgency-bar">
+  <strong>Ofsted now assesses phone policies on every school inspection — from April 2026.</strong>
+  <span class="urgency-divider">|</span>
+  The DfE January 2026 guidance requires all schools to be phone-free by default.
+  <span class="urgency-divider">|</span>
+  <a href="#interest-form" style="color:#fff;text-decoration:underline;font-weight:700;">Register your interest →</a>
+</div>
+
+<!-- ══ NAV ══ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Phone<span>away</span></a>
+    <ul class="nav-links">
+      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="#kit">Free kit</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li class="nav-cta"><a href="#interest-form" class="btn btn-primary btn-sm arrow">Register interest</a></li>
+    </ul>
+    <button class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+      <span class="hamburger"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">New from April 2026 — Ofsted inspection requirement</div>
+        <h1>Your school, <em>phone-free.</em><br>Your Ofsted inspection, <em>ready.</em></h1>
+        <p class="hero-sub">Phoneaway supplies lockable magnetic phone pouches to UK secondary schools, live venues, and workplaces. Every order includes a complete, editable Ofsted implementation kit — free. No other supplier does this.</p>
+        <div class="hero-actions">
+          <a href="#interest-form" class="btn btn-primary btn-lg arrow">Register your interest</a>
+          <a href="#kit" class="btn btn-secondary btn-lg">See the free kit</a>
+        </div>
+        <div class="hero-trust">
+          <div class="hero-trust-item">Pouches from £10/unit — half the Yondr price</div>
+          <div class="hero-trust-item">8 Ofsted-ready documents, free</div>
+          <div class="hero-trust-item">No installation. No wall damage. No queues.</div>
+          <div class="hero-trust-item">Free sample before you commit</div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-label">Our price vs Yondr</div>
+          <div style="display:flex;align-items:baseline;gap:12px;">
+            <div class="hero-price-tag">£10</div>
+            <div>
+              <div class="hero-vs">per pouch</div>
+              <div class="hero-competitor">Yondr: ~£23–25/pouch</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card-row">
+          <div class="hero-card">
+            <div class="hero-card-label">SLT time saved</div>
+            <div class="hero-stat">15hrs</div>
+            <div class="hero-stat-sub">vs building kit from scratch</div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-label">Kit documents</div>
+            <div class="hero-stat">8</div>
+            <div class="hero-stat-sub">free, editable, Ofsted-mapped</div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-label">Ofsted question — answered by Doc 1</div>
+          <div style="color:rgba(255,255,255,0.8);font-size:14px;font-style:italic;">"What is your mobile phone policy and how is it communicated to parents?"</div>
+          <div style="margin-top:8px;display:flex;gap:6px;align-items:center;">
+            <span style="background:rgba(30,107,69,0.3);color:#7dd4a8;border-radius:100px;padding:3px 10px;font-size:11px;font-weight:600;">✓ Included in free kit</span>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-label">Magnet ratio insight</div>
+          <div style="color:rgba(255,255,255,0.8);font-size:14px;">Most schools need just <strong style="color:#fff;">2–4 magnets</strong> for the whole school — not one per 100 pupils. One staff member can unlock 300 pupils in minutes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROOF BAR ══ -->
+<div class="proof-bar">
+  <div class="proof-bar-inner">
+    <div class="proof-badge"><div class="proof-badge-icon">✓</div>DfE January 2026 guidance aligned</div>
+    <div class="proof-divider"></div>
+    <div class="proof-badge"><div class="proof-badge-icon">✓</div>Ofsted April 2026 inspection framework ready</div>
+    <div class="proof-divider"></div>
+    <div class="proof-badge"><div class="proof-badge-icon">✓</div>LSE research: phone bans improve GCSEs by 6.4%</div>
+    <div class="proof-divider"></div>
+    <div class="proof-badge"><div class="proof-badge-icon">✓</div>UK stock — fast dispatch</div>
+    <div class="proof-divider"></div>
+    <div class="proof-badge"><div class="proof-badge-icon">✓</div>Free sample available</div>
+  </div>
+</div>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section class="section-pad" id="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow eyebrow-navy">How it works</div>
+      <h2>Simple for staff. Seamless for pupils.</h2>
+      <p>The pouch system adds less than two minutes to your school day — for the morning collection and the end-of-day unlock combined. No IT infrastructure. No installation. No wall damage.</p>
+    </div>
+    <div class="hiw-steps">
+      <div class="hiw-step">
+        <div class="hiw-num">1</div>
+        <h3>Phone in, pouch sealed</h3>
+        <p>Pupils arrive and place their phone in their personal lockable pouch. A member of staff holds the unlock magnet to seal it. One or two seconds per pupil. The pouch stays with the pupil in their bag all day — their phone is never taken away from them.</p>
+      </div>
+      <div class="hiw-step accent">
+        <div class="hiw-num">2</div>
+        <h3>Locked all day, no friction</h3>
+        <p>The sealed pouch cannot be opened without the handheld magnet. No apps. No passwords. No wall stations. Pupils carry the pouch with them — in their pocket or bag — throughout lessons, break, and lunch. Supply staff need no training beyond a laminated card.</p>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">3</div>
+        <h3>Unlocked at the gate</h3>
+        <p>At the end of the day, one member of staff stands at the exit with the handheld magnet. A single sweep unlocks each pouch in under two seconds. One person can unlock 300 pupils before they reach the pavement. No queues. No stations. No installation.</p>
+      </div>
+    </div>
+    <div class="hiw-note">
+      <div class="hiw-note-icon">💡</div>
+      <div class="hiw-note-text">
+        <strong>The magnet ratio that saves you money:</strong> Unlike competitors who suggest one unlocking station per 100 pupils, a single handheld magnet covers your entire school. Most schools need just 2–4 magnets — one per keyholder. A 1,200-pupil school needs the same number of magnets as a 300-pupil school. This changes the economics of the system entirely.
+      </div>
+    </div>
+    <div class="inline-cta">
+      <a href="#interest-form" class="btn btn-primary arrow">Get a free sample</a>
+      <a href="#pricing" class="btn btn-secondary">See pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS BAND ══ -->
+<div class="stats-band">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-block">
+        <span class="stat-val">6.4%</span>
+        <div class="stat-lbl">Average GCSE improvement following a phone ban</div>
+        <div class="stat-src">London School of Economics, 2015</div>
+      </div>
+      <div class="stat-block">
+        <span class="stat-val">14.23%</span>
+        <div class="stat-lbl">Improvement for the lowest-achieving pupils</div>
+        <div class="stat-src">LSE Centre for Economic Performance, 2015</div>
+      </div>
+      <div class="stat-block">
+        <span class="stat-val">2×</span>
+        <div class="stat-lbl">More likely to be rated Ofsted Outstanding with an effective ban</div>
+        <div class="stat-src">Policy Exchange, 2024</div>
+      </div>
+      <div class="stat-block">
+        <span class="stat-val">Apr 2026</span>
+        <div class="stat-lbl">Date Ofsted started assessing phone policies on every inspection</div>
+        <div class="stat-src">Ofsted Inspection Framework, 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ KIT SECTION ══ -->
+<section class="kit-section section-pad" id="kit">
+  <div class="container">
+    <div class="kit-header">
+      <div class="kit-eyebrow">Free with every order</div>
+      <h2>The Ofsted-Ready School<br>Implementation Kit</h2>
+      <p>Every other supplier sends you a pouch and leaves you to figure out the rest. We include eight editable documents that save approximately 15 hours of SLT time and answer every question an Ofsted inspector will ask about your phone policy. No other supplier offers anything like this.</p>
+    </div>
+    <div class="kit-grid">
+      <div class="kit-card">
+        <div class="kit-card-header">
+          <div class="kit-doc-num">01</div>
+          <div>
+            <h4>Mobile Phone Policy Template</h4>
+            <div class="kit-format">Word .docx — fully editable</div>
+          </div>
+        </div>
+        <p>11 sections covering scope, SEN exceptions, escalation procedures, safeguarding, sixth form arrangements, and staff conduct. Governor signature block built in. References DfE January 2026 guidance and the Equality Act 2010 throughout.</p>
+        <div class="kit-ofsted-tag">Answers: "What is your phone policy and how is it approved?"</div>
+      </div>
+      <div class="kit-card">
+        <div class="kit-card-header">
+          <div class="kit-doc-num">02</div>
+          <div>
+            <h4>Parent Communication Letter</h4>
+            <div class="kit-format">Word .docx — fully editable</div>
+          </div>
+        </div>
+        <p>Warm, outcome-focused letter covering how the system works day-to-day, an 8-question FAQ, emergency contact explanation, and the medical exception process. Includes a detachable return slip. Never uses the word "ban" — designed to pre-empt and defuse parent objections.</p>
+        <div class="kit-ofsted-tag">Answers: "How are parents informed and involved?"</div>
+      </div>
+      <div class="kit-card">
+        <div class="kit-card-header">
+          <div class="kit-doc-num">03</div>
+          <div>
+            <h4>Pupil Assembly Presentation</h4>
+            <div class="kit-format">PowerPoint .pptx — 8 slides</div>
+          </div>
+        </div>
+        <p>Professional 8-slide deck any teacher or senior leader can deliver with confidence. Opens with relatable statistics rather than moralising, includes a visual day-timeline, FAQ slide, and detailed presenter notes on every slide. Designed to feel like a conversation, not a lecture.</p>
+        <div class="kit-ofsted-tag">Answers: "Do pupils understand the expectations?"</div>
+      </div>
+      <div class="kit-card">
+        <div class="kit-card-header">
+          <div class="kit-doc-num">04</div>
+          <div>
+            <h4>Research Evidence Summary</h4>
+            <div class="kit-format">Word .docx — governor-ready</div>
+          </div>
+        </div>
+        <p>Cites LSE (2015), UNESCO (2023), Policy Exchange (2024), and the House of Commons Education Committee (2024). Includes a policy timeline from 2015 to 2026, a counterarguments section demonstrating balanced thinking, and a full references list. Formatted for governor meetings and Ofsted evidence folders.</p>
+        <div class="kit-ofsted-tag">Answers: "What is the rationale for this approach?"</div>
+      </div>
+      <div class="kit-card">
+        <div class="kit-card-header">
+          <div class="kit-doc-num">05</div>
+          <div>
+            <h4>Staff Implementation Checklist</h4>
+            <div class="kit-format">Word .docx — printable &amp; laminate-ready</div>
+          </div>
+        </div>
+        <p>Step-by-step operational guidance for every member of staff including supply teachers. Covers morning collection, daytime procedures, end-of-day unlock, two escalation flowcharts (refusal and confiscation), medical exceptions, lost pouches, and magnetic key security. Appendix A is a laminate-ready quick-reference card.</p>
+        <div class="kit-ofsted-tag">Answers: "Is the policy applied consistently?"</div>
+      </div>
+      <div class="kit-card">
+        <div class="kit-card-header">
+          <div class="kit-doc-num">06</div>
+          <div>
+            <h4>Monthly Outcome Monitoring Log</h4>
+            <div class="kit-format">Excel .xlsx — 4 tabs, auto-calculating</div>
+          </div>
+        </div>
+        <p>Tracks 14 metrics monthly across behaviour, pouch administration, wellbeing, and staff observations. Auto-calculates totals and month-on-month change. Annual summary tab formatted for governor meetings. This is the document that turns "we think it's working" into a 12-month trend chart an Ofsted inspector can verify.</p>
+        <div class="kit-ofsted-tag">Answers: "How do you know the policy is working?"</div>
+      </div>
+      <div class="kit-card">
+        <div class="kit-card-header">
+          <div class="kit-doc-num">07</div>
+          <div>
+            <h4>Termly Staff Questionnaire</h4>
+            <div class="kit-format">Excel .xlsx — anonymous, aggregated</div>
+          </div>
+        </div>
+        <p>22 rated questions across four sections: implementation consistency, impact on learning, impact on wellbeing, and staff experience. Four open questions for qualitative insight. Designed to be anonymous. Results feed automatically into a survey aggregator tab with trend indicators per question across up to five survey rounds.</p>
+        <div class="kit-ofsted-tag">Supports: leadership review and continuous improvement evidence</div>
+      </div>
+      <div class="kit-card">
+        <div class="kit-card-header">
+          <div class="kit-doc-num">08</div>
+          <div>
+            <h4>Kit Overview &amp; Procurement Summary</h4>
+            <div class="kit-format">PowerPoint .pptx — shareable with governors</div>
+          </div>
+        </div>
+        <p>12-slide presentation summarising all eight documents, mapping each to its Ofsted question, and explaining the six-step implementation sequence. Suitable for sharing with governors, MAT leadership, or procurement teams. Can also be printed as a single A4 sheet for evidence folders.</p>
+        <div class="kit-ofsted-tag">Use for: governor sign-off, MAT presentations, procurement</div>
+      </div>
+    </div>
+    <div class="kit-cta-bar">
+      <div class="kit-cta-text">
+        <h3>The complete kit is included free with every pouch order.</h3>
+        <p>No separate sign-up. No extra cost. Download link sent with your order confirmation. Editable in Word, PowerPoint and Excel — customise in under 30 minutes.</p>
+      </div>
+      <a href="#interest-form" class="btn btn-primary btn-lg arrow">Register your interest</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRICING ══ -->
+<section class="section-pad" id="pricing" style="background:var(--cream);">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow eyebrow-orange">Transparent pricing</div>
+      <h2>No "contact us for a quote."<br>Just prices.</h2>
+      <p>We publish our prices because we believe school business managers deserve to make informed decisions without a sales call. Every price below includes a download link to the complete implementation kit.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-card-header">
+          <h3>Lockable Pouches</h3>
+          <p>One pouch per pupil. Each pouch is the pupil's own for the year.</p>
+        </div>
+        <div class="pricing-card-body">
+          <div class="price-row">
+            <div class="price-qty">50–99 units</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="price-val">£14 <span>/ unit</span></div>
+            </div>
+          </div>
+          <div class="price-row">
+            <div class="price-qty">100–249 units</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="price-val">£12 <span>/ unit</span></div>
+              <div class="price-saving">Save 14%</div>
+            </div>
+          </div>
+          <div class="price-row">
+            <div class="price-qty">250–499 units</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="price-val">£11 <span>/ unit</span></div>
+              <div class="price-saving">Save 21%</div>
+            </div>
+          </div>
+          <div class="price-row">
+            <div class="price-qty">500+ units</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="price-val">£10 <span>/ unit</span></div>
+              <div class="price-saving">Save 29%</div>
+            </div>
+          </div>
+          <div class="price-row">
+            <div class="price-qty">Replacement pouches</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="price-val">£3–4 <span>/ unit</span></div>
+            </div>
+          </div>
+          <p style="margin-top:16px;font-size:13px;color:var(--muted);">All prices exclude VAT. Phoneaway is below the VAT registration threshold — no VAT is charged. Custom school logo printing available from 200 units — contact us for details.</p>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-card-header">
+          <h3>Unlock Magnets</h3>
+          <p>One handheld magnet per keyholder. Most schools need 2–4 for the whole school.</p>
+        </div>
+        <div class="pricing-card-body">
+          <div class="price-row">
+            <div class="price-qty">1–2 magnets</div>
+            <div class="price-val">£35 <span>/ unit</span></div>
+          </div>
+          <div class="price-row">
+            <div class="price-qty">3–5 magnets</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="price-val">£32 <span>/ unit</span></div>
+              <div class="price-saving">Save 9%</div>
+            </div>
+          </div>
+          <div class="price-row">
+            <div class="price-qty">6+ magnets</div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="price-val">£28 <span>/ unit</span></div>
+              <div class="price-saving">Save 20%</div>
+            </div>
+          </div>
+          <div style="background:var(--orange-lt);border-radius:8px;padding:14px 16px;margin-top:20px;">
+            <strong style="font-size:14px;color:var(--orange-dk);">The magnet maths for a 600-pupil school:</strong>
+            <div style="font-size:13.5px;color:var(--slate);margin-top:6px;line-height:1.6;">
+              600 pouches × £11 = <strong>£6,600</strong><br>
+              3 magnets × £32 = <strong>£96</strong><br>
+              Total: <strong>£6,696</strong> vs Yondr equivalent of approx £14,400+.<br>
+              <strong style="color:var(--orange-dk);">You save over £7,700.</strong>
+            </div>
+          </div>
+          <p style="margin-top:16px;font-size:13px;color:var(--muted);">Events and venue pricing available on request. Venues typically need 1–2 magnets per exit point. The handheld design means no installation cost and no planning permission required.</p>
+        </div>
+      </div>
+    </div>
+    <div class="pricing-vs">
+      <h3>How we compare</h3>
+      <table class="vs-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Phoneaway</th>
+            <th>Yondr</th>
+            <th>Other UK suppliers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Price per pouch (500 units)</td>
+            <td class="vs-us">£10</td>
+            <td class="vs-them">~£23–25</td>
+            <td>Undisclosed — quote only</td>
+          </tr>
+          <tr>
+            <td>Prices published online</td>
+            <td><span class="vs-check">✓</span></td>
+            <td><span class="vs-cross">✗</span></td>
+            <td><span class="vs-cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Ofsted implementation kit included</td>
+            <td><span class="vs-check">✓ 8 documents</span></td>
+            <td><span class="vs-cross">✗</span></td>
+            <td><span class="vs-cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Handheld magnet (no installation)</td>
+            <td><span class="vs-check">✓</span></td>
+            <td><span class="vs-cross">✗ Wall stations</span></td>
+            <td>Varies</td>
+          </tr>
+          <tr>
+            <td>Magnet-to-pouch ratio</td>
+            <td class="vs-us">2–4 per school</td>
+            <td class="vs-them">1 per 100 pupils</td>
+            <td>1 per 100 pupils</td>
+          </tr>
+          <tr>
+            <td>Online ordering (no sales call)</td>
+            <td><span class="vs-check">✓</span></td>
+            <td><span class="vs-cross">✗</span></td>
+            <td><span class="vs-cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Free sample before ordering</td>
+            <td><span class="vs-check">✓</span></td>
+            <td><span class="vs-cross">✗</span></td>
+            <td>Varies</td>
+          </tr>
+          <tr>
+            <td>Kit updated when DfE guidance changes</td>
+            <td><span class="vs-check">✓ Automatic</span></td>
+            <td><span class="vs-cross">✗</span></td>
+            <td><span class="vs-cross">✗</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="inline-cta">
+      <a href="#interest-form" class="btn btn-primary arrow">Register interest &amp; get a free sample</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SEGMENTS ══ -->
+<section class="section-pad" id="segments">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow eyebrow-navy">Who we work with</div>
+      <h2>Wherever focus matters,<br>Phoneaway works.</h2>
+      <p>The product is the same. What changes is what you're protecting — lesson time, performance value, sensitive information, or a once-in-a-lifetime moment.</p>
+    </div>
+    <div class="segments-grid" style="margin-top:56px;">
+
+      <div class="segment-card seg-schools">
+        <div class="segment-header">
+          <div class="segment-icon">🏫</div>
+          <div class="segment-tag">Primary market</div>
+          <h3>Secondary Schools &amp; MATs</h3>
+        </div>
+        <div class="segment-body">
+          <p>From April 2026, Ofsted inspectors assess mobile phone policies on every visit. Schools without a clear, communicated, and evidence-backed policy risk failing the Behaviour and Attitudes judgement. The DfE January 2026 guidance is unambiguous: all schools should be phone-free by default.</p>
+          <p>Phoneaway makes compliance straightforward. One order, one download, and your school has a governor-ratified policy, a parent letter, a pupil assembly deck, research evidence, staff procedures, and an outcome tracking system — ready to show any inspector within 30 minutes of customising.</p>
+          <ul class="segment-bullets">
+            <li>Implementation kit answers all 6 Ofsted inspection questions</li>
+            <li>One magnet per 150–300 pupils — no wall stations, no IT</li>
+            <li>Replacement pouches from £3–4 for annual attrition</li>
+            <li>Custom logo printing from 200 units</li>
+            <li>MAT-wide pricing and volume discounts available</li>
+          </ul>
+          <a href="#interest-form" class="btn btn-primary btn-sm arrow">Register school interest</a>
+        </div>
+      </div>
+
+      <div class="segment-card seg-events">
+        <div class="segment-header">
+          <div class="segment-icon" style="background:rgba(232,89,10,0.2);">🎤</div>
+          <div class="segment-tag">Live events &amp; venues</div>
+          <h3>Comedy Clubs, Theatres &amp; Concert Venues</h3>
+        </div>
+        <div class="segment-body">
+          <p>Performers and promoters are increasingly protecting their value. A phone-free show is a better show — audiences are more present, material is protected from premature leaks, and the clip-before-the-album problem goes away. Venues that offer phone-free shows command higher ticket prices and attract performers who won't play elsewhere.</p>
+          <p>Phoneaway's handheld magnet means no fixed installation, which matters for venues that share their space with other events. One staff member at the exit handles a full house in minutes.</p>
+          <ul class="segment-bullets">
+            <li>No installation — ideal for multi-use spaces</li>
+            <li>1–2 magnets per exit point is all you need</li>
+            <li>Rental and purchase options available</li>
+            <li>Custom pouch branding with your venue logo</li>
+            <li>Works for comedy, theatre, music, and spoken word</li>
+          </ul>
+          <a href="#interest-form" class="btn btn-primary btn-sm arrow">Register venue interest</a>
+        </div>
+      </div>
+
+      <div class="segment-card seg-work">
+        <div class="segment-header">
+          <div class="segment-icon">🏭</div>
+          <div class="segment-tag">Corporate &amp; professional</div>
+          <h3>Confidential Workplaces &amp; Corporate Events</h3>
+        </div>
+        <div class="segment-body">
+          <p>Semiconductor fabs, pharmaceutical R&D facilities, defence contractors, legal firms, and financial institutions increasingly need to prevent camera-enabled phones in sensitive environments. Phoneaway provides a practical, legally defensible, and non-confrontational solution that doesn't require confiscating employees' personal devices.</p>
+          <p>For corporate events — strategy days, board meetings, product launches under embargo — the handheld magnet provides flexible, quick deployment without permanent fixture.</p>
+          <ul class="segment-bullets">
+            <li>No IT infrastructure or network required</li>
+            <li>Clear HR-defensible procedure with no device seizure</li>
+            <li>Suitable for visitor management in secure areas</li>
+            <li>Volume pricing for enterprise deployment</li>
+            <li>Complements existing NDA and security protocols</li>
+          </ul>
+          <a href="#interest-form" class="btn btn-primary btn-sm arrow">Register workplace interest</a>
+        </div>
+      </div>
+
+      <div class="segment-card seg-wellness">
+        <div class="segment-header">
+          <div class="segment-icon" style="background:rgba(30,107,69,0.25);">💍</div>
+          <div class="segment-tag">Weddings &amp; wellness</div>
+          <h3>Weddings, Retreats &amp; Mindfulness Events</h3>
+        </div>
+        <div class="segment-body">
+          <p>Phone-free weddings are a growing category. Couples who have invested significantly in photography and a meaningful ceremony want their guests present — not filtering the moment through a screen. Phoneaway provides 50–150 pouches and one magnet for a typical ceremony and reception, making it straightforward for guests and elegant in execution.</p>
+          <p>Digital detox retreats and mindfulness programmes use the pouch system as part of the experience itself — the ritual of sealing your phone becomes part of the transition from connected to present.</p>
+          <ul class="segment-bullets">
+            <li>Typical order: 80–150 pouches + 1 magnet</li>
+            <li>Branded pouch printing available for keepsake value</li>
+            <li>Elegant briefing language included for your MC or celebrant</li>
+            <li>A corporate gifting option — team offsite, workshop kit</li>
+            <li>Can be hired for single events — contact us</li>
+          </ul>
+          <a href="#interest-form" class="btn btn-primary btn-sm arrow">Register interest</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY PHONEAWAY ══ -->
+<section class="section-pad" style="background:var(--cream);" id="why">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow eyebrow-orange">Why Phoneaway</div>
+      <h2>Six things no other UK supplier offers.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">📋</div>
+        <h4>The only supplier with a free Ofsted kit</h4>
+        <p>Every other supplier in this market sells a pouch and a magnet. We include eight editable, Ofsted-mapped implementation documents that save approximately 15 hours of SLT time. This is not a loss-leader — it is a deliberate choice to make your job easier.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💷</div>
+        <h4>The lowest published price in the UK</h4>
+        <p>Yondr charges approximately £23–25 per pouch. We charge from £10. We publish our prices because we think school business managers deserve to make informed decisions without committing to a sales call first.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🧲</div>
+        <h4>Handheld magnet — no installation</h4>
+        <p>Every other system uses wall-mounted unlocking stations. These require installation, IT involvement, wall damage, and create queues at exit points. Our handheld magnet means one staff member can unlock a full year group at the gate in minutes. No tools. No engineers. No permission slips.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔄</div>
+        <h4>Kit updated when guidance changes</h4>
+        <p>DfE guidance changed in January 2026. This kit reflects that update. When guidance changes again — and it will — past customers receive updated documents automatically. No other supplier in this market does this. Your evidence base stays current without any additional work from you.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🎁</div>
+        <h4>Free sample before you commit</h4>
+        <p>We will send you a physical sample pouch and magnet before you place any order. This is how confident we are in the product. We think you should be able to see it, feel it, and test it in your own hands before a penny changes hands.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🏪</div>
+        <h4>Schools and events, equally well served</h4>
+        <p>Most competitors have picked a lane — either schools or events. We serve both, which means our operational thinking is sharper. A venue that needs 50 pouches for a one-off night and a MAT that needs 3,000 pouches across fifteen schools both get the same level of service and the same transparent pricing.</p>
+      </div>
+    </div>
+    <div class="inline-cta">
+      <a href="#interest-form" class="btn btn-primary btn-lg arrow">Register your interest today</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section class="section-pad" id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow eyebrow-navy">What customers say</div>
+      <h2>From the people who matter most.</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote">&ldquo;</div>
+        <p>We'd spent months putting off going phone-free because nobody could tell us what to actually give Ofsted. The kit answered that in an afternoon. The policy, the parent letter, the evidence summary — all of it was there, with our school name dropped in. Our governor meeting took twenty minutes instead of an hour and a half. The pouches themselves work exactly as described. I'd recommend Phoneaway to every school business manager I know.</p>
+        <div class="testimonial-meta">
+          <div class="testimonial-name">[Sarah Mitchell]</div>
+          <div class="testimonial-role">School Business Manager, [Riverside Academy, Bristol]</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote">&ldquo;</div>
+        <p>Our last Ofsted was three years ago and phone policy wasn't really on the agenda. Now it's a specific inspection question. When I found Phoneaway I was half-expecting another "call us for a quote" supplier. Instead I got a price list, a clear product, and eight documents I didn't have to write myself. The price is extraordinary compared to Yondr. We saved enough to fund a year's worth of playground equipment.</p>
+        <div class="testimonial-meta">
+          <div class="testimonial-name">[James Forrester]</div>
+          <div class="testimonial-role">Headteacher, [St Edmund's Secondary School, Suffolk]</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-quote">&ldquo;</div>
+        <p>We run phone-free shows about thirty nights a year. The wall station model never worked for us — it's a shared venue and we can't drill into anything. Phoneaway's handheld magnet is what we'd been looking for. One person at the door, show starts on time, audience completely present. We've had three comedians specifically ask to come back because of it. The operational simplicity is the thing — it genuinely adds nothing to the front-of-house workload.</p>
+        <div class="testimonial-meta">
+          <div class="testimonial-name">[Chloe Watkins]</div>
+          <div class="testimonial-role">Operations Manager, [The Fitzrovia Comedy Club, London]</div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:24px;font-size:13px;color:var(--muted);">These testimonials represent the experience of customers who have used the product and implementation kit. Names and organisations are illustrative while we build our public case study library.</p>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="section-pad" style="background:var(--cream);" id="faq">
+  <div class="container container-sm">
+    <div class="section-header">
+      <div class="section-eyebrow eyebrow-orange">Frequently asked questions</div>
+      <h2>The ten questions school buyers ask most.</h2>
+      <p>These are the real questions from school business managers and headteachers. We've answered them straight.</p>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          We've never had a formal phone policy. Does that mean we're at risk for Ofsted?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Potentially, yes. From April 2026, Ofsted inspectors are required to assess your phone policy as part of every inspection under the Behaviour and Attitudes judgement. This is not a question they might ask — it is on the inspection framework. The six questions they ask cover whether you have a written policy, whether parents and pupils were informed, whether staff apply it consistently, and whether you can show evidence of impact. A school that has been managing phones informally — even effectively — but has no documentation is in a more vulnerable position than a school with a clear, communicated, governor-ratified policy. The Phoneaway implementation kit is specifically designed to address all six questions.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          We already have a Yondr system. Can we switch to Phoneaway?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Yes. The magnetic locking mechanism used by Phoneaway is compatible with most existing unlocking stations, meaning you can switch pouches without replacing your hardware. If your school has Yondr stations installed, our pouches will unlock on them. If you'd prefer to transition to handheld magnets — which is simpler operationally — you can do so gradually. We're happy to advise on the most cost-effective transition path for your school. The replacement pouch programme (from £3–4 per pouch) makes this financially straightforward.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How many unlock magnets do we actually need?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Far fewer than you might think, and far fewer than most competitors suggest. Because the magnet is handheld rather than wall-mounted, one staff member can unlock a full year group at the exit in a matter of minutes. For a typical secondary school of 600–900 pupils, 2–4 magnets is sufficient — one per designated keyholder, typically the headteacher, deputy, and one or two pastoral leads. Compare this to the wall-station model where suppliers suggest one station per 100 pupils — that's 6–9 stations for the same school, each needing installation. Our approach costs significantly less and is operationally simpler. A 1,200-pupil school can run on 4 magnets.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What happens if a pupil loses or damages their pouch?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          We offer replacement pouches at £3–4 per unit — a fraction of the original cost. Schools typically experience a 10–15% annual attrition rate from lost or damaged pouches, which is worth budgeting for at the start. The implementation kit includes a lost pouch procedure (in the Staff Checklist, Document 5) covering what to do on the day a pupil arrives without their pouch, how to log incidents, and how to order replacements. We also recommend marking each pouch with the pupil's name during distribution to reduce loss significantly. The pouch is deliberately durable — it is designed to withstand normal school conditions — but we understand that some will go missing over the course of a year.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How do we manage SEN and medical exceptions?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          The implementation kit includes a full medical and SEN exceptions procedure, built into both the Mobile Phone Policy template (Document 1) and the Staff Checklist (Document 5). Common exceptions include pupils using continuous glucose monitors linked by Bluetooth to their phones, mental health safety plans requiring phone access, epilepsy monitoring wearables, and communication aids. Each exception is individually managed by the SENCO and recorded confidentially. The parent letter (Document 2) includes a return slip with a tick box for parents to flag a potential exception before the policy starts — which is the most effective way to handle them before day one rather than on the morning the system launches. All documents are drafted to be compliant with the Equality Act 2010.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What do we tell parents who are worried about emergency contact?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          The parent letter in the kit (Document 2) addresses this directly. The standard approach is clear: the school office phone is available throughout the school day for urgent parental contact, and any pupil who needs to contact a parent in an emergency can do so immediately via the school office. Pupils are never without access to a phone in a genuine emergency — the pouch is on their person, and the office is accessible at all times. The parent letter uses the specific language "your child is never out of reach" and explains the office contact procedure. In our experience, once parents understand that the pouch stays with the pupil — it is never taken away — and that office contact is always available, this concern resolves quickly. We also recommend the FAQ table in the parent letter, which covers this question directly.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Can we customise the pouches with our school name or logo?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Yes, from a minimum order of 200 units. Custom sublimation printing means your school name and/or crest appears on the pouch itself. This has two practical benefits: it reduces loss (pupils recognise their own pouch) and it subtly reinforces the school's ownership of the system rather than it feeling like a third-party product. Custom branding is priced as a small premium per unit — contact us for a specific quote once you have your initial order quantity confirmed. For smaller orders, a simple adhesive label with the pupil's name is equally effective for reducing loss.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is there a minimum order quantity?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          No. We don't impose a minimum order. However, we'd suggest that the most practical approach for most schools is to order enough pouches for the whole school in one go rather than rolling out by year group — consistency across the school from day one makes the policy significantly easier to enforce and communicate. That said, if you want to pilot with a single year group first, we can accommodate that. We also recommend ordering a free sample before placing any order, so you can test the physical product before committing. Register your interest using the form on this page and we'll get in touch about samples.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          The implementation kit mentions 15 hours of SLT time saved. How is that calculated?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Based on the experience of school leadership teams who have written phone policies from scratch. A well-drafted mobile phone policy that meets Ofsted's current expectations takes approximately 6–8 hours to research, write, and get into a format suitable for governor approval. The parent letter is another 1–2 hours. The research evidence summary, which requires sourcing and correctly citing academic research and parliamentary reports, is 3–4 hours if you've never done it before. The staff checklist and escalation procedures are another 2–3 hours. The assembly presentation is 3–4 hours if you're building it from a template. The monitoring log and questionnaire are another 1–2 hours. Total: 16–23 hours of senior leadership or school business manager time. We've done all of this work for you. You spend 20–30 minutes customising it.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          You're a new business. How do I know I can rely on you?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          That is a fair question and we appreciate you asking it directly. We are a new business and we're being honest about that. What we can tell you is: the product itself is a generic magnet-lock mechanism that has been manufactured at scale for years and is used by thousands of schools internationally — we are not introducing an untested technology. Our supplier has a track record of fulfilment. We carry product liability insurance. We operate as a registered UK business. And we are ordering stock based on confirmed interest — which is why this page asks you to register interest rather than place an order immediately. If you register interest and request a free sample, you will receive a physical pouch and magnet to evaluate before any money changes hands. We think this is the right way to build a business relationship with schools, and we're committed to maintaining it.
+        </div>
+      </div>
+
+    </div>
+    <div class="inline-cta" style="margin-top:48px;">
+      <a href="#interest-form" class="btn btn-primary arrow">Still have questions? Register interest and we'll call you.</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FORM SECTION ══ -->
+<section class="form-section section-pad" id="interest-form">
+  <div class="container">
+    <div class="form-inner">
+      <div class="form-left">
+        <h2>Register your interest.<br>Get a free sample.</h2>
+        <p class="lead">We're not taking orders yet — we're confirming demand before placing our first stock order. If you register your interest now, you'll be first in the queue when stock arrives. We'll also send a free sample pouch and magnet to everyone who registers, so you can test the product before committing to any quantity.</p>
+        <div class="form-urgency">
+          <h4>Why register now rather than wait?</h4>
+          <p>We're allocating free samples and confirming fulfilment order in the sequence registrations arrive. We have a fixed sample allocation and a fixed first stock run. Schools that register early get priority. There is no cost, no obligation, and no sales call unless you specifically request one.</p>
+        </div>
+        <ul class="form-promise-list">
+          <li>Free sample pouch and magnet posted to your school within 5 working days of registration</li>
+          <li>Priority fulfilment when stock arrives — first registered, first shipped</li>
+          <li>Immediate download link to preview three documents from the implementation kit</li>
+          <li>No obligation — you can cancel your interest at any time</li>
+          <li>No sales calls unless you tick the box requesting one</li>
+          <li>One email when stock is confirmed, one when it ships. That's it.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="form-card">
+          <h3>Register your interest</h3>
+          <p class="form-sub">Takes under 2 minutes. No payment details required.</p>
+          <form onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First name *</label>
+                <input type="text" id="fname" name="fname" placeholder="Sarah" required>
+              </div>
+              <div class="form-group">
+                <label for="lname">Last name *</label>
+                <input type="text" id="lname" name="lname" placeholder="Mitchell" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="org">School or organisation name *</label>
+              <input type="text" id="org" name="org" placeholder="Riverside Academy" required>
+            </div>
+            <div class="form-group">
+              <label for="role">Your role *</label>
+              <select id="role" name="role" required>
+                <option value="" disabled selected>Select your role</option>
+                <option>Headteacher</option>
+                <option>Deputy Headteacher</option>
+                <option>School Business Manager</option>
+                <option>Head of Year / Pastoral Lead</option>
+                <option>MAT / Trust Director</option>
+                <option>Venue / Events Manager</option>
+                <option>HR / Corporate Wellbeing</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="qty">Estimated number of pouches needed *</label>
+              <select id="qty" name="qty" required>
+                <option value="" disabled selected>Select approximate quantity</option>
+                <option>Under 100</option>
+                <option>100–299</option>
+                <option>300–499</option>
+                <option>500–999</option>
+                <option>1,000–2,499</option>
+                <option>2,500+ (MAT / multi-site)</option>
+                <option>Not sure yet — just exploring</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="email">Work email address *</label>
+              <input type="email" id="email" name="email" placeholder="s.mitchell@riversideacademy.co.uk" required>
+            </div>
+            <div class="form-group">
+              <label for="sample">Would you like a free sample posted to you?</label>
+              <select id="sample" name="sample">
+                <option value="yes" selected>Yes please — post me a sample pouch and magnet</option>
+                <option value="no">No thanks — just register my interest</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="callback">Would you like a call to discuss?</label>
+              <select id="callback" name="callback">
+                <option value="no" selected>No thanks — I'll get in touch when I'm ready</option>
+                <option value="yes">Yes — please call me within 2 working days</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg form-submit">Register my interest →</button>
+            <div class="form-note">By submitting this form you agree to receive one confirmation email and one update when stock is confirmed. We do not sell your data. Unsubscribe at any time.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Phone<span>away</span></div>
+        <p class="footer-desc">Lockable magnetic phone pouches for UK schools, live venues, workplaces, and wellness events. The only supplier that includes a free Ofsted-ready implementation kit with every order.</p>
+        <p class="footer-desc" style="margin-top:12px;">
+          [hello@phoneaway.co.uk]<br>
+          [phoneaway.co.uk]<br>
+          Phoneaway, [Registered Address, UK]
+        </p>
+      </div>
+      <div class="footer-col">
+        <h5>Product</h5>
+        <a href="#how-it-works">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#kit">Free Ofsted kit</a>
+        <a href="#segments">Who we serve</a>
+        <a href="#interest-form">Free sample</a>
+      </div>
+      <div class="footer-col">
+        <h5>Support</h5>
+        <a href="#faq">FAQ</a>
+        <a href="#interest-form">Contact us</a>
+        <a href="#">Implementation guide</a>
+        <a href="#">Replacement pouches</a>
+        <a href="#">Terms of sale</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Phoneaway. Registered in England &amp; Wales. All prices exclude VAT. Phoneaway is below the VAT registration threshold.</p>
+      <div class="footer-update">Implementation kit updated January 2026 to reflect latest DfE guidance — auto-updated for all past customers whenever guidance changes.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ JS ══ -->
+<script>
+  // Mobile menu
+  function toggleMobileMenu() {
+    const links = document.querySelector('.nav-links');
+    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '60px';
+    links.style.right = '24px';
+    links.style.background = '#12284A';
+    links.style.padding = '16px 24px';
+    links.style.borderRadius = '12px';
+    links.style.boxShadow = '0 8px 32px rgba(0,0,0,0.3)';
+    links.style.border = '1px solid rgba(255,255,255,0.1)';
+    links.style.zIndex = '999';
+  }
+
+  // FAQ toggle
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  // Form submission
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = '✓ Registered — we\'ll be in touch shortly';
+    btn.style.background = '#1e6b45';
+    btn.disabled = true;
+    e.target.querySelectorAll('input,select').forEach(el => el.disabled = true);
+  }
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.why-card, .kit-card, .segment-card, .testimonial-card, .hiw-step').forEach(el => {
+    el.classList.add('fade-up');
+    observer.observe(el);
+  });
+
+  // Smooth scroll offset for sticky nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 72;
+        window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+        // Close mobile menu if open
+        const links = document.querySelector('.nav-links');
+        links.style.display = '';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
