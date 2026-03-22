@@ -1374,10 +1374,15 @@ a:hover { text-decoration: underline; }
             </div>
             <div class="form-group">
               <label for="callback">Would you like a call to discuss?</label>
-              <select id="callback" name="callback">
+              <select id="callback" name="callback" onchange="togglePhone(this)">
                 <option value="no" selected>No thanks — I'll get in touch when I'm ready</option>
                 <option value="yes">Yes — please call me within 2 working days</option>
               </select>
+            </div>
+            <div class="form-group" id="phone-group" style="display:none;">
+              <label for="phone">Telephone number <span style="color:var(--orange);">*</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="e.g. 01234 567890" autocomplete="tel">
+              <div style="font-size:12px;color:var(--muted);margin-top:5px;">We'll call during school hours (8am–4pm) on a working day.</div>
             </div>
             <button type="submit" class="btn btn-primary btn-lg form-submit">Register my interest →</button>
             <div class="form-note">By submitting this form you agree to receive one confirmation email and one update when stock is confirmed. We do not sell your data. Unsubscribe at any time.</div>
@@ -1427,6 +1432,20 @@ a:hover { text-decoration: underline; }
 
 <!-- ══ JS ══ -->
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Show/hide phone field based on callback selection
+  function togglePhone(select) {
+    var group = document.getElementById('phone-group');
+    var phoneInput = document.getElementById('phone');
+    if (select.value === 'yes') {
+      group.style.display = 'block';
+      phoneInput.required = true;
+    } else {
+      group.style.display = 'none';
+      phoneInput.required = false;
+      phoneInput.value = '';
+    }
+  }
+
   // Mobile menu
   function toggleMobileMenu() {
     const links = document.querySelector('.nav-links');
