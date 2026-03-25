@@ -322,7 +322,7 @@ a:hover { text-decoration: underline; }
 }
 .pricing-card {
   border: 1px solid var(--border); border-radius: var(--r-lg);
-  overflow: hidden; box-shadow: var(--sh);
+  box-shadow: var(--sh);
 }
 .pricing-card-header {
   background: var(--navy); padding: 24px 28px;
@@ -597,6 +597,20 @@ a:hover { text-decoration: underline; }
 @media (max-width: 768px) {
   .section-pad { padding: 64px 0; }
   .nav-links { display: none; }
+  .nav-links.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 24px;
+    background: #12284A;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+    z-index: 999;
+    gap: 16px;
+  }
   .nav-mobile-toggle { display: block; }
   .kit-grid { grid-template-columns: 1fr; }
   .pricing-grid { grid-template-columns: 1fr; }
@@ -633,7 +647,7 @@ a:hover { text-decoration: underline; }
 
 <!-- ══ URGENCY BAR ══ -->
 <div class="urgency-bar">
-  <strong>* Ofsted now assesses phone policies on every school inspection from April 2026.</strong>
+  <strong><span style="font-size:18px;vertical-align:middle;margin-right:2px;">*</span> Ofsted now assesses phone policies on every school inspection from April 2026.</strong>
   <span class="urgency-divider">|</span>
   The DfE January 2026 guidance requires all schools to be phone-free by default.
   <span class="urgency-divider">|</span>
@@ -747,7 +761,7 @@ a:hover { text-decoration: underline; }
       <div class="hiw-step accent">
         <div class="hiw-num">2</div>
         <h3>Secure all day, no friction</h3>
-        <p>The locked pouch cannot be opened without the unlock magnet. No apps. No passwords. No complicated setup. Pupils carry the pouch in their pocket or bag throughout lessons, break, and lunch. Supply staff need no training beyond a laminated quick-reference card.</p>
+        <p>The locked pouch cannot be opened without the unlock magnet. No complicated setup. Pupils carry the pouch in their pocket or bag throughout lessons, break, and lunch. Supply staff need no training beyond a laminated quick-reference card.</p>
       </div>
       <div class="hiw-step">
         <div class="hiw-num">3</div>
@@ -898,6 +912,7 @@ a:hover { text-decoration: underline; }
       <div class="kit-cta-text">
         <h3>Included free with every pouch order.</h3>
         <p>All documents are editable in Word, PowerPoint and Excel.</p>
+        <p style="margin-top:8px;font-size:13px;opacity:0.75;">Custom logo printing on pouches available from 200 units. <a href="#interest-form" style="color:#f5a06b;">Contact us for details.</a></p>
       </div>
       <a href="#interest-form" class="btn btn-primary btn-lg arrow">Register your interest</a>
     </div>
@@ -915,7 +930,7 @@ a:hover { text-decoration: underline; }
 
     <div class="pricing-grid-wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:56px;">
 
-      <div class="pricing-card">
+      <div class="pricing-card" style="margin-top:20px;">
         <div class="pricing-card-header">
           <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Core</div>
           <h3>PhoneAway Core</h3>
@@ -941,8 +956,8 @@ a:hover { text-decoration: underline; }
         </div>
       </div>
 
-      <div class="pricing-card" style="border:2px solid var(--orange);position:relative;padding-top:14px;">
-        <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 16px;border-radius:100px;white-space:nowrap;">Most popular</div>
+      <div class="pricing-card" style="border:2px solid var(--orange);position:relative;margin-top:20px;">
+        <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 16px;border-radius:100px;white-space:nowrap;z-index:2;">Most popular</div>
         <div class="pricing-card-header">
           <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Complete</div>
           <h3>PhoneAway Complete</h3>
@@ -975,7 +990,6 @@ a:hover { text-decoration: underline; }
           <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">Unlock magnets</div>
           <h3 style="color:#fff;margin-bottom:10px;">Purchased once, tailored to your site.</h3>
           <p style="color:rgba(255,255,255,0.65);font-size:14px;">Magnets are a one-off purchase, separate from the subscription. The right number depends on your exits and how you want to manage the unlock process. We will advise when you get in touch.</p>
-          <p style="color:rgba(255,255,255,0.5);font-size:13px;margin-top:8px;">Custom logo printing on pouches available from 200 units. Contact us for details.</p>
         </div>
         <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:var(--r);padding:20px 24px;">
           <div class="price-row" style="border-color:rgba(255,255,255,0.1);"><div class="price-qty" style="color:rgba(255,255,255,0.6);">1 to 2 magnets</div><div class="price-val" style="color:#fff;">£32 <span>each</span></div></div>
@@ -1275,18 +1289,20 @@ a:hover { text-decoration: underline; }
   // Mobile menu
   function toggleMobileMenu() {
     const links = document.querySelector('.nav-links');
-    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
-    links.style.flexDirection = 'column';
-    links.style.position = 'absolute';
-    links.style.top = '60px';
-    links.style.right = '24px';
-    links.style.background = '#12284A';
-    links.style.padding = '16px 24px';
-    links.style.borderRadius = '12px';
-    links.style.boxShadow = '0 8px 32px rgba(0,0,0,0.3)';
-    links.style.border = '1px solid rgba(255,255,255,0.1)';
-    links.style.zIndex = '999';
+    const isOpen = links.classList.contains('mobile-open');
+    if (isOpen) {
+      links.classList.remove('mobile-open');
+    } else {
+      links.classList.add('mobile-open');
+    }
   }
+
+  // Close menu when a link is clicked
+  document.querySelectorAll('.nav-links a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.querySelector('.nav-links').classList.remove('mobile-open');
+    });
+  });
 
   // FAQ toggle
   function toggleFaq(btn) {
